@@ -46,6 +46,9 @@ public class HomePage {
     @FindBy(xpath = "//tbody")
     public WebElement verificationTable;
 
+    @FindBy(xpath = "//input[@id='disabledTravellersCheckbox']")
+    public WebElement disabledCheckBox;
+
     public void advertisementClose(){
         BrowserUtils.waitForClickablility(advertisement,5);
         BrowserUtils.clickWithJS(advertisement);

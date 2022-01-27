@@ -59,4 +59,10 @@ public class HomePageStepDefs {
         homePage.addIntermediateStationField.sendKeys(vıaStation);
     }
 
+    @When("the user selects {string} connection option")
+    public void the_user_selects_connection_option(String connectionOption) {
+     BrowserUtils.clickWithJS(homePage.disabledCheckBox);
+
+    }
+
 }
