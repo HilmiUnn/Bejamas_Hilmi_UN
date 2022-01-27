@@ -8,19 +8,22 @@ import com.bejamas.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 import java.util.Map;
 
+
 public class HomePageStepDefs {
-    HomePage homePage=new HomePage();
+    HomePage homePage;
+
     @Given("the user navigates to home page")
     public void the_user_navigates_to_home_page() {
         String url= ConfigurationReader.get("url");
         Driver.get().get(url);
+        homePage=new HomePage();
 
         BrowserUtils.waitForClickablility(homePage.cookieAcceptButton,10);
         homePage.cookieAcceptButton.click();
-
         homePage.advertisementClose();
     }
 
@@ -47,17 +50,18 @@ public class HomePageStepDefs {
 
     @Then("the related results appear")
     public void the_related_results_appear() {
-    //    homePage.advertisementClose();
-        homePage.verifyResults();
+        BrowserUtils.waitFor(2);
+        Assert.assertTrue(Driver.get().getCurrentUrl().contains("queryPageDisplayed=yes"));
     }
+
     @When("the user clicks on {string} icon")
-    public void the_user_clicks_on_icon(String string) {
+    public void the_user_clicks_on_icon() {
        homePage.addIntermediateStation.click();
     }
 
     @When("the user enters {string} to VIA station")
-    public void the_user_enters_to_VIA_station(String vıaStation) {
-        homePage.addIntermediateStationField.sendKeys(vıaStation);
+    public void the_user_enters_to_VIA_station(String viaStation) {
+        homePage.addIntermediateStationField.sendKeys(viaStation);
     }
 
     @When("the user selects {string} connection option")
@@ -68,6 +72,19 @@ public class HomePageStepDefs {
     @Then("the related results include option")
     public void the_related_results_include_option() {
         new ResultPage().contentVerify();
+    }
+
+    @When("the user selects {string} dropdown")
+    public void the_user_selects_dropdown(String string) {
+        BrowserUtils.clickWithJS(homePage.providerDropdown);
+        BrowserUtils.waitFor(1);
+    }
+
+    @When("the user select just {string} provider")
+    public void the_user_select_just_provider(String string) {
+       homePage.uncheckAll.click();
+       BrowserUtils.waitFor(1);
+       homePage.pkpIntercity.click();
     }
 
 }

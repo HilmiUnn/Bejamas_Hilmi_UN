@@ -8,11 +8,11 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"html:target/default-html-reports",
                   "rerun:target/rerun.txt"
-        },
+                },
         features = "src/test/resources/features",
         glue = "com/bejamas/step_definitions",
         dryRun=false,
-        tags="@wip"
+        tags="@TC-8"
 )
 public class CukesRunner {
 

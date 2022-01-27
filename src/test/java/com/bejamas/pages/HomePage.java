@@ -2,7 +2,6 @@ package com.bejamas.pages;
 
 import com.bejamas.utilities.BrowserUtils;
 import com.bejamas.utilities.Driver;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -12,6 +11,12 @@ public class HomePage {
     public HomePage(){
         PageFactory.initElements(Driver.get(),this);
     }
+
+    @FindBy(xpath = "//button[@mode='primary']")
+    public WebElement cookieAcceptButton;
+
+    @FindBy(css = ".anchor_close")
+    public WebElement advertisement;
 
     @FindBy(id="from-station")
     public WebElement departureStation;
@@ -37,17 +42,19 @@ public class HomePage {
     @FindBy(id = "singlebutton")
     public WebElement searchButton;
 
-    @FindBy(xpath = "//button[@mode='primary']")
-    public WebElement cookieAcceptButton;
-
-    @FindBy(xpath = "//span[@class='anchor_close']")
-    public WebElement advertisement;
-
-    @FindBy(xpath = "//tbody")
-    public WebElement verificationTable;
-
     @FindBy(xpath = "//input[@id='disabledTravellersCheckbox']")
     public WebElement disabledCheckBox;
+
+    @FindBy(css = "row.options-header.accordion-toggle.collapsed")
+    public WebElement providerDropdown;
+
+    @FindBy(className = "first ac")
+    public WebElement uncheckAll;
+
+    @FindBy(id = "P1")
+    public WebElement pkpIntercity;
+
+
 
     public void advertisementClose(){
         BrowserUtils.waitForClickablility(advertisement,5);
@@ -66,19 +73,6 @@ public class HomePage {
             BrowserUtils.clickWithJS(arrival);
         }
     }
-
-    public void verifyResults(){
-      if(verificationTable.getAttribute("innerHtml").contains(departureStation.getText())&&
-              verificationTable.getAttribute("innerHtml").contains(arrivalStation.getText())){
-          System.out.println("Results are matching with searching");
-        }
-      else {
-          System.out.println("Results are not related with search");
-      }
-
-    }
-
-
 
 
 

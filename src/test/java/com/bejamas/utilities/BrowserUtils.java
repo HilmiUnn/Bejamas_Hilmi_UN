@@ -7,15 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BrowserUtils {
-    /**
-     * Moves the mouse to given element
-     *
-     * @param element on which to hover
-     */
-    public static void hover(WebElement element) {
-        Actions actions = new Actions(Driver.get());
-        actions.moveToElement(element).perform();
-    }
+
     /**
      * Performs a pause
      *

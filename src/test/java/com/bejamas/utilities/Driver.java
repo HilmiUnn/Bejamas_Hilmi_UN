@@ -16,7 +16,6 @@ public class Driver {
     private Driver() {
 
     }
-
     private static WebDriver driver;
 
     public static WebDriver get() {
@@ -65,29 +64,8 @@ public class Driver {
                     driver = new SafariDriver();
                     break;
             }
-
         }
-
-
         return driver;
-    }
-
-    public static void setDriver(String browserType){
-
-        synchronized (Driver.class){
-            switch (browserType){
-                case "chrome":
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
-                    break;
-                case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
-                    break;
-            }
-
-        }
-
     }
 
     public static void closeDriver() {

@@ -1,26 +1,19 @@
 package com.bejamas.step_definitions;
 
-import com.bejamas.pages.HomePage;
-import com.bejamas.utilities.BrowserUtils;
 import com.bejamas.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+
+import java.util.concurrent.TimeUnit;
 
 public class Hooks {
     @Before
-    public void setUp(Scenario scenario) {
+    public void setUp() {
         Driver.get().manage().window().maximize();
-
-        if (scenario.getSourceTagNames().contains("@firefox")) {
-            Driver.setDriver("firefox");
-        } else if (scenario.getSourceTagNames().contains("@chrome")) {
-            Driver.setDriver("chrome");
-
-        }
+        Driver.get().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
     @After
     public void tearDown(Scenario scenario){
@@ -29,7 +22,6 @@ public class Hooks {
             scenario.attach(screenshot,"image/png","screenshot");
         }
 
-        BrowserUtils.waitFor(5);
         Driver.closeDriver();
     }
 }
