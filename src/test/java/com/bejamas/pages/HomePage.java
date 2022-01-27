@@ -2,6 +2,8 @@ package com.bejamas.pages;
 
 import com.bejamas.utilities.BrowserUtils;
 import com.bejamas.utilities.Driver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -27,16 +29,16 @@ public class HomePage {
     @FindBy(xpath ="//button[@class='right btn-pkp-reverse']" )
     public WebElement futureDateArrow;
 
-    @FindBy(className = "add-mid")
+    @FindBy(xpath = "(//span[@class='ico-main-search-2 midpoint pover qhelp'])[1]")
     public WebElement addIntermediateStation;
 
     @FindBy(id = "wcag-via")
     public WebElement addIntermediateStationField;
 
-    @FindBy(id = "odj")
+    @FindBy(xpath = "(//input[@name='REQ0HafasSearchForw']//following-sibling::ins)[1]")
     public WebElement departure;
 
-    @FindBy(id = "prz")
+    @FindBy(xpath = "(//input[@name='REQ0HafasSearchForw']//following-sibling::ins)[2]")
     public WebElement arrival;
 
     @FindBy(id = "singlebutton")
@@ -45,16 +47,11 @@ public class HomePage {
     @FindBy(xpath = "//input[@id='disabledTravellersCheckbox']")
     public WebElement disabledCheckBox;
 
-    @FindBy(css = "row.options-header.accordion-toggle.collapsed")
+    @FindBy(css = ".row.options-header.accordion-toggle.collapsed")
     public WebElement providerDropdown;
 
-    @FindBy(className = "first ac")
+    @FindBy(css = ".first.ac")
     public WebElement uncheckAll;
-
-    @FindBy(id = "P1")
-    public WebElement pkpIntercity;
-
-
 
     public void advertisementClose(){
         BrowserUtils.waitForClickablility(advertisement,5);
@@ -74,6 +71,15 @@ public class HomePage {
         }
     }
 
+    public WebElement getOptionFromProvider(String optionName)
+    {
 
+        if (optionName.equals("PKP INTERCITY"))
+            return Driver.get().findElement(By.id("P1"));
+        else if (optionName.equals("POLREGIO"))
+            return Driver.get().findElement(By.id("P2"));
+        else
+            return null;
+    }
 
 }

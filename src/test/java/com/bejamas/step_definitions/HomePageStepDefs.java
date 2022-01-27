@@ -5,10 +5,12 @@ import com.bejamas.pages.ResultPage;
 import com.bejamas.utilities.BrowserUtils;
 import com.bejamas.utilities.ConfigurationReader;
 import com.bejamas.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 
 import java.util.Map;
 
@@ -54,37 +56,36 @@ public class HomePageStepDefs {
         Assert.assertTrue(Driver.get().getCurrentUrl().contains("queryPageDisplayed=yes"));
     }
 
-    @When("the user clicks on {string} icon")
-    public void the_user_clicks_on_icon() {
-       homePage.addIntermediateStation.click();
-    }
-
     @When("the user enters {string} to VIA station")
-    public void the_user_enters_to_VIA_station(String viaStation) {
-        homePage.addIntermediateStationField.sendKeys(viaStation);
+    public void the_user_enters_to_VIA_station(String vıaStation) {
+        homePage.addIntermediateStationField.sendKeys(vıaStation);
     }
 
-    @When("the user selects {string} connection option")
-    public void the_user_selects_connection_option(String connectionOption) {
-     BrowserUtils.clickWithJS(homePage.disabledCheckBox);
-
-    }
     @Then("the related results include option")
     public void the_related_results_include_option() {
         new ResultPage().contentVerify();
     }
 
-    @When("the user selects {string} dropdown")
-    public void the_user_selects_dropdown(String string) {
-        BrowserUtils.clickWithJS(homePage.providerDropdown);
-        BrowserUtils.waitFor(1);
+
+    @And("the user clicks on Add Intermediate Station icon")
+    public void theUserClicksOnAddIntermediateStationIcon() {
+        homePage.addIntermediateStation.click();
+    }
+
+    @And("the user selects DISABLED TRAVELLERS connection option")
+    public void theUserSelectsDISABLEDTRAVELLERSConnectionOption() {
+        homePage.disabledCheckBox.sendKeys(Keys.SPACE);
+    }
+
+    @And("the user selects Provider dropdown")
+    public void theUserSelectsProviderDropdown() {
+        homePage.providerDropdown.sendKeys(Keys.ENTER);
     }
 
     @When("the user select just {string} provider")
-    public void the_user_select_just_provider(String string) {
-       homePage.uncheckAll.click();
-       BrowserUtils.waitFor(1);
-       homePage.pkpIntercity.click();
+    public void the_user_select_just_provider(String providerOption) {
+        homePage.uncheckAll.sendKeys(Keys.SPACE);
+        BrowserUtils.waitFor(3);
+        homePage.getOptionFromProvider(providerOption).sendKeys(Keys.SPACE);
     }
-
 }
