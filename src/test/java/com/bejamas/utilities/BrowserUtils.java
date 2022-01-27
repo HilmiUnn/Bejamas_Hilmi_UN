@@ -51,6 +51,18 @@ public class BrowserUtils {
     }
 
     /**
+     * Waits for the provided element to be visible on the page
+     *
+     * @param element
+     * @param timeToWaitInSec
+     * @return
+     */
+    public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
+        WebDriverWait wait = new WebDriverWait(Driver.get(), timeToWaitInSec);
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    /**
      * Clicks on an element using JavaScript
      *
      * @param element

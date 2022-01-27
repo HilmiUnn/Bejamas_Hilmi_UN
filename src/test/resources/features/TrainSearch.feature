@@ -35,4 +35,4 @@ Feature: Train Search Functions
     And the user selects any date in the future
     And the user selects "DISABLED TRAVELLERS" connection option
     And the user clicks on "Search Connection" button
-    Then the related results appear
+    Then the related results include option

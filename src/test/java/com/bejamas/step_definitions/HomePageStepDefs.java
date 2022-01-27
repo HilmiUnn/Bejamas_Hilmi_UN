@@ -1,6 +1,7 @@
 package com.bejamas.step_definitions;
 
 import com.bejamas.pages.HomePage;
+import com.bejamas.pages.ResultPage;
 import com.bejamas.utilities.BrowserUtils;
 import com.bejamas.utilities.ConfigurationReader;
 import com.bejamas.utilities.Driver;
@@ -63,6 +64,10 @@ public class HomePageStepDefs {
     public void the_user_selects_connection_option(String connectionOption) {
      BrowserUtils.clickWithJS(homePage.disabledCheckBox);
 
+    }
+    @Then("the related results include option")
+    public void the_related_results_include_option() {
+        new ResultPage().contentVerify();
     }
 
 }
