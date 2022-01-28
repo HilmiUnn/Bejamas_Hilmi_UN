@@ -1,7 +1,6 @@
 package com.bejamas.step_definitions;
 
 import com.bejamas.pages.HomePage;
-import com.bejamas.pages.ResultPage;
 import com.bejamas.utilities.BrowserUtils;
 import com.bejamas.utilities.ConfigurationReader;
 import com.bejamas.utilities.Driver;
@@ -10,10 +9,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-
 import java.util.Map;
-
 
 public class HomePageStepDefs {
     HomePage homePage;
@@ -45,25 +43,16 @@ public class HomePageStepDefs {
       homePage.timeOption(time);
     }
 
-    @When("the user clicks on {string} button")
-    public void the_user_clicks_on_button(String searchButton) {
-      homePage.searchButton.click();
-    }
 
     @Then("the related results appear")
     public void the_related_results_appear() {
-        BrowserUtils.waitFor(2);
         Assert.assertTrue(Driver.get().getCurrentUrl().contains("queryPageDisplayed=yes"));
     }
 
     @When("the user enters {string} to VIA station")
-    public void the_user_enters_to_VIA_station(String vıaStation) {
-        homePage.addIntermediateStationField.sendKeys(vıaStation);
-    }
-
-    @Then("the related results include option")
-    public void the_related_results_include_option() {
-        new ResultPage().contentVerify();
+    public void the_user_enters_to_VIA_station(String viaStation) {
+        homePage.addIntermediateStationField.sendKeys(viaStation);
+        BrowserUtils.waitFor(2);                               //to show intermediate station on UI
     }
 
 
@@ -84,8 +73,13 @@ public class HomePageStepDefs {
 
     @When("the user select just {string} provider")
     public void the_user_select_just_provider(String providerOption) {
-        homePage.uncheckAll.sendKeys(Keys.SPACE);
-        BrowserUtils.waitFor(3);
+        BrowserUtils.clickWithJS( Driver.get().findElement(By.cssSelector(".first.ac")));
         homePage.getOptionFromProvider(providerOption).sendKeys(Keys.SPACE);
+    }
+
+    @And("the user clicks on Search Connection button")
+    public void theUserClicksOnSearchConnectionButton() {
+        homePage.searchButton.click();
+        BrowserUtils.waitFor(2);
     }
 }

@@ -1,3 +1,4 @@
+@wip
 Feature: Train Search Functions
   Background:
     Given the user navigates to home page
@@ -9,7 +10,7 @@ Feature: Train Search Functions
   Scenario Outline:The user can make search with valid locations
     And the user selects any date in the future
     And the user selects "<time>" option
-    And the user clicks on "Search Connection" button
+    And the user clicks on Search Connection button
     Then the related results appear
     Examples:
       | time      |
@@ -21,20 +22,20 @@ Feature: Train Search Functions
     And the user clicks on Add Intermediate Station icon
     And the user enters "SOPOT-" to VIA station
     And the user selects any date in the future
-    And the user clicks on "Search Connection" button
+    And the user clicks on Search Connection button
     Then the related results appear
 
   @TC-7
   Scenario: The user can select connections options
     And the user selects any date in the future
     And the user selects DISABLED TRAVELLERS connection option
-    And the user clicks on "Search Connection" button
+    And the user clicks on Search Connection button
     Then the related results appear
 
   @TC-8
-  Scenario: The user can select connections options
+  Scenario: The user can select provider options
     And the user selects any date in the future
     And the user selects Provider dropdown
     And the user select just "PKP INTERCITY" provider
-    And the user clicks on "Search Connection" button
+    And the user clicks on Search Connection button
     Then the related results appear

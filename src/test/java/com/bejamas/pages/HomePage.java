@@ -3,7 +3,6 @@ package com.bejamas.pages;
 import com.bejamas.utilities.BrowserUtils;
 import com.bejamas.utilities.Driver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -50,19 +49,28 @@ public class HomePage {
     @FindBy(css = ".row.options-header.accordion-toggle.collapsed")
     public WebElement providerDropdown;
 
-    @FindBy(css = ".first.ac")
-    public WebElement uncheckAll;
-
+    /**
+     * Closes the advertisement when it becomes clickable
+     */
     public void advertisementClose(){
-        BrowserUtils.waitForClickablility(advertisement,5);
+        BrowserUtils.waitForClickablility(advertisement,10);
         BrowserUtils.clickWithJS(advertisement);
     }
 
+    /**
+     * Assignees Departure and Arrival stations
+     *  @param from
+     *  @param to
+     */
     public void destinations(String from, String to){
         departureStation.sendKeys(from);
         arrivalStation.sendKeys(to);
     }
 
+    /**
+     * Changes Departure and Arrival time option
+     *  @param time
+     */
     public void timeOption(String time){
         if (time.equals("Departure")){
             BrowserUtils.clickWithJS(departure);
@@ -71,6 +79,11 @@ public class HomePage {
         }
     }
 
+    /**
+     * Selects preferred provider name
+     * @param optionName
+     * @return
+     */
     public WebElement getOptionFromProvider(String optionName)
     {
 
